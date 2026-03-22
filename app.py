@@ -6,6 +6,7 @@ from tensorflow.keras.models import load_model
 import streamlit as st
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import re
 
 # --- Page Configuration ---
 st.set_page_config(page_title="ReelFeel AI", page_icon="🎬", layout="centered")
@@ -42,8 +43,16 @@ model, word_index = load_my_model()
 
 # --- Helper Functions ---
 def preprocess_text(text):
-    words = text.lower().split()
-    encoded_review = [word_index.get(word, 2) + 3 for word in words]
+    text = re.sub(r'[^\w\s]', '', text).lower()
+    words = text.split()
+
+    encoded_review = []
+    for word in words:
+        if word in word_index:
+            encoded_review.append(word_index[word] + 3)
+        else:
+            encoded_review.append(2)
+            
     padded_review = sequence.pad_sequences([encoded_review], maxlen=500)
     return padded_review
 
