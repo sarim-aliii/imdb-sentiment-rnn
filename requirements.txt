@@ -1,8 +1,8 @@
-ipykernel
 pandas
 numpy
 scikit-learn
-streamlit
+streamlit>=1.22.0
 tensorflow
 wordcloud
 matplotlib
+altair<5.0.0
