@@ -6,3 +6,4 @@ tensorflow
 wordcloud
 matplotlib
 altair<5.0.0
+re
